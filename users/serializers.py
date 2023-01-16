@@ -51,7 +51,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.save()
         return user
     
-    
+
 class UserTokenSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -80,3 +80,5 @@ class ProfileSerializer(serializers.ModelSerializer):
         instance.user_id = self.context['request'].user.id
         instance.save()
         return instance
+
+
