@@ -15,9 +15,9 @@ class DepartmentSerializer(serializers.ModelSerializer):
 
 class PersonnelSerializer(serializers.ModelSerializer):
     
-    # days_since_joined = serializers.SerializerMethodField()
-    # create_user_id = serializers.IntegerField(required = False)
-    # create_user = serializers.StringRelatedField()
+    days_since_joined = serializers.SerializerMethodField()
+    create_user_id = serializers.IntegerField(required = False)
+    create_user = serializers.StringRelatedField()
     
     class Meta:
         model = Personnel
@@ -33,14 +33,14 @@ class PersonnelSerializer(serializers.ModelSerializer):
         return (now() - obj.start_date).days
     
 
-# class DepartmentPersonnelSerializer(serializers.ModelSerializer):
+class DepartmentPersonnelSerializer(serializers.ModelSerializer):
     
-#     personnel_count = serializers.SerializerMethodField()
-#     personals = PersonnelSerializer(many=True, read_only=True)
+    personnel_count = serializers.SerializerMethodField()
+    personals = PersonnelSerializer(many=True, read_only=True)
     
-#     class Meta:
-#         model = Department
-#         fields = ("id", "name", "personnel_count", "personals")
+    class Meta:
+        model = Department
+        fields = ("id", "name", "personnel_count", "personals")
         
-#     def get_personnel_count(self, obj):
-#         return obj.personals.count()
+    def get_personnel_count(self, obj):
+        return obj.personals.count()
